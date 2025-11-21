@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Home | Andre Lew</title>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li>
+            <a href="/"><b>Home</b></a>
+          </li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/experiments">Experiments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>About</h2>
+        <p>
+          <strong>Welcome to my portfolio website!</strong>
+          <br />
+          I'm Andre, a passionate student and software engineer with industry experience in
+          <em>full-stack development</em>. I enjoy building intuitive user interfaces and features.
+          I'm also currently studying Computer Science at <i>UC San Diego</i>!
+        </p>
+
+        <p>This website is built with:</p>
+        <ol>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ol>
+
+        <p>SVG:</p>
+        <svg width="50" height="50">
+          <circle cx="25" cy="25" r="20" fill="orange" stroke="maroon" stroke-width="4" />
+        </svg>
+      </section>
+
+      <section>
+        <section-header>
+          <h2>Featured blog post</h2>
+          <a href="/blog">View all</a>
+        </section-header>
+
+        <article>
+          <h3><a href="/blog/placeholder-post-3">Placeholder post 3</a></h3>
+          <time datetime="2025-10-01">October 1, 2025</time>
+        </article>
+      </section>
+
+      <section>
+        <section-header>
+          <h2>Featured projects</h2>
+          <a href="/projects">View all</a>
+        </section-header>
+
+        <grid-container columns="2">
+          <project-card>
+            <h3>DevTerms</h3>
+            <picture>
+              <source srcset="/media/projects/devterms-lg.jpg" media="(min-width: 768px)" />
+              <img
+                src="/media/projects/devterms.jpg"
+                alt="Cover for DevTerms project"
+                loading="lazy"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://devterms.com" target="_blank">View project</a>
+          </project-card>
+
+          <project-card>
+            <h3>Cobalt</h3>
+            <picture>
+              <source srcset="/media/projects/raycast-cobalt-lg.jpg" media="(min-width: 768px)" />
+              <img
+                src="/media/projects/raycast-cobalt.jpg"
+                alt="Cover for Cobalt project"
+                loading="lazy"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://www.raycast.com/aelew/cobalt" target="_blank">View project</a>
+          </project-card>
+        </grid-container>
+      </section>
+
+      <!-- Hello World custom element -->
+      <hello-world></hello-world>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+    <script src="/hello-world-custom-element.js" defer></script>
+  </body>
+</html>

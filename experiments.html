@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Experiments | Andre Lew</title>
+
+    <!-- to satisfy <style> usage -->
+    <style>
+      span,
+      canvas {
+        border: 1px dashed red;
+      }
+    </style>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li>
+            <a href="/experiments"><b>Experiments</b></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section-header>
+        <hgroup>
+          <h2>Experiments</h2>
+          <p>Test page to show proper use of additional elements/features</p>
+        </hgroup>
+      </section-header>
+
+      <dialog open>
+        <h3>&lt;dialog&gt;</h3>
+        <p>Boo! I'm a dialog!</p>
+        <form method="dialog">
+          <button>Go away</button>
+        </form>
+      </dialog>
+
+      <section>
+        <h3>&lt;template&gt;, &lt;div&gt;</h3>
+        <template>
+          <div>
+            <p>
+              This text is inside a template! We would need to clone it with JS to see this text on
+              the page.
+            </p>
+          </div>
+        </template>
+        <p>
+          The template element above has text that we can only see once the template is cloned with
+          JavaScript (which I did not add per the assignment instructions)
+        </p>
+      </section>
+
+      <section>
+        <h3>&lt;span&gt;</h3>
+        <p>This text is inside a paragraph element, <span>and this text is in a span</span>!</p>
+      </section>
+
+      <section>
+        <h3>&lt;picture&gt; (checking orientation)</h3>
+        <picture>
+          <source
+            srcset="/media/experiments/picture-portrait.png"
+            media="(orientation: portrait)"
+          />
+          <img
+            src="/media/experiments/picture-landscape.png"
+            alt="Example usage of picture element"
+          />
+        </picture>
+      </section>
+
+      <section>
+        <h3>&lt;iframe&gt;</h3>
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-117.2391763329506%2C32.87679170837823%2C-117.23563581705096%2C32.87863208465117&amp;layer=mapnik"
+          title="Embedded map showing Center Hall at UCSD"
+          width="200"
+          height="200"
+        >
+        </iframe>
+      </section>
+
+      <section>
+        <h3>&lt;video&gt;, &lt;source&gt;</h3>
+        <figure>
+          <video width="200" height="200" controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            Your browser could not play the demo video.
+          </video>
+          <figcaption>
+            <a href="https://www.w3schools.com/html/html5_video.asp" target="_blank">
+              Video from W3Schools
+            </a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h3>&lt;audio&gt;</h3>
+        <figure>
+          <audio controls>
+            <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg" />
+            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+            Your browser could not load the demo audio.
+          </audio>
+          <figcaption>
+            <a href="https://www.w3schools.com/html/html5_audio.asp" target="_blank">
+              Audio from W3Schools
+            </a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h3>&lt;canvas&gt;</h3>
+        <canvas id="canvas" width="200" height="200">
+          Canvas could not be displayed. JavaScript disabled?
+        </canvas>
+      </section>
+
+      <section>
+        <h3>Extra Credit</h3>
+        <ol>
+          <li>
+            <h4>Use MathML to write the formula for Einstein's famous formula E=mc^2 (5 pts):</h4>
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mrow>
+                <mi>E</mi>
+                <mo>=</mo>
+                <mi>m</mi>
+                <msup>
+                  <mi>c</mi>
+                  <mn>2</mn>
+                </msup>
+              </mrow>
+            </math>
+          </li>
+          <li>
+            <h4>
+              Despite being in the HTML specification for a long time, developers could not make use
+              of it until quite recently. Explain why that might be the case (Hint: Check the
+              caniuse.com page for MathML!) (5 pts):
+            </h4>
+            <p>
+              Developers could not use MathML up until recently because it was only supported in a
+              couple of browsers for a pretty long time. Chrome/Chromium specifically had
+              unstable/no support for MathML for years, and other browsers like Safari struggled to
+              render MathML efficiently.
+            </p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+    <script>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = 'orange';
+      ctx.fillRect(50, 50, 100, 100);
+
+      ctx.fillStyle = 'black';
+      ctx.fillRect(75, 75, 20, 30); // left eye
+      ctx.fillRect(105, 75, 20, 30); // right eye
+      ctx.fillRect(75, 120, 50, 10); // mouth
+
+      ctx.fillText("(it's supposed to be a pumpkin 💀)", 20, 175);
+    </script>
+  </body>
+</html>

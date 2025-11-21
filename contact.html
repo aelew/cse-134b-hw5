@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Contact | Andre Lew</title>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li>
+            <a href="/contact"><b>Contact</b></a>
+          </li>
+          <li><a href="/experiments">Experiments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <section-header>
+          <hgroup>
+            <h2>Contact</h2>
+            <p>Get in touch with me</p>
+          </hgroup>
+        </section-header>
+
+        <form method="POST">
+          <fieldset>
+            <legend>Fill everything out to send me a message!</legend>
+
+            <form-group>
+              <label for="progress">Progress</label>
+              <progress id="progress" max="100" value="25">25%</progress>
+            </form-group>
+
+            <grid-container>
+              <form-group>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required />
+              </form-group>
+
+              <form-group>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </form-group>
+            </grid-container>
+
+            <form-group>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" cols="20" required></textarea>
+            </form-group>
+
+            <button type="submit">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+  </body>
+</html>

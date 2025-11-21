@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Projects | Andre Lew</title>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/projects"><b>Projects</b></a>
+          </li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/experiments">Experiments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <section-header>
+          <hgroup>
+            <h2>Projects</h2>
+            <p>A collection of my public work</p>
+          </hgroup>
+        </section-header>
+
+        <grid-container columns="2">
+          <project-card>
+            <h3>DevTerms</h3>
+            <picture>
+              <source srcset="/media/projects/devterms-lg.jpg" media="(min-width: 768px)" />
+              <img
+                src="/media/projects/devterms.jpg"
+                alt="Cover for DevTerms project"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://devterms.com" target="_blank">View project</a>
+          </project-card>
+
+          <project-card>
+            <h3>Cobalt</h3>
+            <picture>
+              <source srcset="/media/projects/raycast-cobalt-lg.jpg" media="(min-width: 768px)" />
+              <img
+                src="/media/projects/raycast-cobalt.jpg"
+                alt="Cover for Cobalt project"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://www.raycast.com/aelew/cobalt" target="_blank">View project</a>
+          </project-card>
+
+          <project-card>
+            <h3>Mailery</h3>
+            <picture>
+              <source srcset="/media/projects/mailery-lg.jpg" media="(min-width: 768px)" />
+              <img
+                src="/media/projects/mailery.jpg"
+                alt="Cover for Mailery project"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://mailery.app" target="_blank">View project</a>
+          </project-card>
+
+          <project-card>
+            <h3>Tech Internship Alerts</h3>
+            <picture>
+              <source
+                srcset="/media/projects/tech-internship-alerts-lg.jpg"
+                media="(min-width: 768px)"
+              />
+              <img
+                src="/media/projects/tech-internship-alerts.jpg"
+                alt="Cover for Tech Internship Alerts project"
+                height="173"
+                width="330"
+              />
+            </picture>
+            <a href="https://github.com/aelew/tech-internship-alerts" target="_blank"
+              >View project</a
+            >
+          </project-card>
+        </grid-container>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+  </body>
+</html>

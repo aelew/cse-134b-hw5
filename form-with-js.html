@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Contact | Andre Lew</title>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/experiments">Experiments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <section-header>
+          <hgroup>
+            <h2>Contact</h2>
+            <p>Get in touch with me</p>
+          </hgroup>
+        </section-header>
+
+        <form method="POST" action="https://www.httpbin.org/post">
+          <fieldset>
+            <legend>Fill everything out to send me a message!</legend>
+
+            <grid-container>
+              <form-group>
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  maxlength="256"
+                  pattern="^[a-zA-Z\s\-']+$"
+                  title="Field must only contain letters, spaces, hyphens, and apostrophes"
+                />
+              </form-group>
+
+              <form-group>
+                <label for="email">Email</label>
+                <!-- not using pattern for email addresses here due to the overwhelming amount of different address possibilities -->
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  maxlength="320"
+                  title="Please enter a valid email address"
+                />
+              </form-group>
+            </grid-container>
+
+            <form-group>
+              <label for="comments">Comments</label>
+              <textarea
+                name="comments"
+                id="comments"
+                rows="5"
+                cols="20"
+                required
+                maxlength="500"
+              ></textarea>
+              <small id="comments-char-count"></small>
+            </form-group>
+
+            <output id="error-message" data-variant="error" role="alert"></output>
+            <output id="info-message" data-variant="info" aria-live="polite"></output>
+
+            <input type="hidden" name="possible_bot" value="true" />
+            <input type="hidden" name="form-errors" id="form-errors" value="" />
+
+            <button type="submit">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+    <script>
+      const form = document.querySelector('form');
+      if (!form) {
+        throw new Error('Failed to locate <form>');
+      }
+
+      const errorOutput = document.getElementById('error-message');
+      const infoOutput = document.getElementById('info-message');
+      const formErrorsField = document.getElementById('form-errors');
+
+      if (!errorOutput || !infoOutput || !formErrorsField) {
+        throw new Error('Failed to locate <output> element(s)');
+      }
+
+      const fields = Array.from(form.elements).filter(
+        (elm) => elm instanceof HTMLInputElement || elm instanceof HTMLTextAreaElement
+      );
+
+      // FIELD VALIDATION
+      function updateValidationMessage(field) {
+        if (field.validity.valueMissing) {
+          field.setCustomValidity(`${field.labels?.[0]?.textContent || field.name} is required`);
+        } else if (field.validity.typeMismatch) {
+          field.setCustomValidity('Please enter a valid value type');
+        } else if (field.validity.patternMismatch) {
+          field.setCustomValidity(field.title || 'Invalid format');
+        } else if (field.validity.tooLong) {
+          field.setCustomValidity(`Maximum ${field.maxLength} characters allowed`);
+        } else {
+          field.setCustomValidity('');
+        }
+      }
+
+      const form_errors = [];
+      fields.forEach((field) => {
+        field.addEventListener('invalid', (e) => {
+          updateValidationMessage(field);
+
+          form_errors.push({
+            field: field.name,
+            value: field.value,
+            reason: field.validationMessage,
+          });
+        });
+
+        field.addEventListener('input', (e) => {
+          updateValidationMessage(field);
+
+          if (field.pattern && field.value && field.validity.patternMismatch) {
+            field.style.animation = 'none';
+            setTimeout(() => {
+              field.style.animation = 'flash 1s';
+            });
+
+            // update output
+            const message = field.title || 'Illegal character entered';
+            errorOutput.textContent = message;
+            setTimeout(() => {
+              if (errorOutput.textContent === message) {
+                errorOutput.textContent = '';
+              }
+            }, 5000);
+          }
+        });
+      });
+
+      // TEXTAREA CHAR LIMIT HANDLING
+      const commentsField = document.getElementById('comments');
+      const charCountElement = document.getElementById('comments-char-count');
+
+      function updateCharacterCount() {
+        const maxLength = commentsField.maxLength;
+        const currentLength = commentsField.value.length;
+        const remaining = maxLength - currentLength;
+
+        charCountElement.classList.remove('warning', 'error');
+
+        charCountElement.textContent = `${remaining} ${
+          remaining === 1 ? 'character' : 'characters'
+        } remaining`;
+
+        const warningThreshold = maxLength * 0.25;
+        const errorThreshold = maxLength * 0.05;
+
+        if (remaining <= errorThreshold) {
+          charCountElement.classList.add('error');
+        } else if (remaining <= warningThreshold) {
+          charCountElement.classList.add('warning');
+        }
+
+        // handle over-limit (shouldn't happen with maxlength, but requirement states to check)
+        if (currentLength > maxLength) {
+          commentsField.setCustomValidity('Character limit exceeded');
+        } else if (commentsField.validationMessage.includes('Character limit')) {
+          commentsField.setCustomValidity(''); // clear if length error
+        }
+      }
+
+      commentsField.addEventListener('input', updateCharacterCount);
+      updateCharacterCount();
+
+      // FORM SUBMISSION
+      form.addEventListener('submit', (e) => {
+        console.log('Form submitted');
+        infoOutput.textContent = '';
+        errorOutput.textContent = '';
+
+        const invalidFields = fields.filter((field) => !field.checkValidity());
+
+        if (invalidFields.length) {
+          e.preventDefault();
+          invalidFields.forEach((field) => updateValidationMessage(field));
+
+          formErrorsField.value = JSON.stringify(form_errors);
+          errorOutput.textContent = 'Please fix the errors before submitting';
+
+          // focus first invalid field and show its validation message
+          invalidFields[0].focus();
+          invalidFields[0].reportValidity();
+
+          return;
+        }
+
+        infoOutput.textContent = 'All fields are valid! Submitting...';
+        formErrorsField.value = JSON.stringify(form_errors);
+      });
+    </script>
+  </body>
+</html>
