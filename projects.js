@@ -12,24 +12,22 @@ class ProjectCardElement extends HTMLElement {
     }
 
     this.innerHTML = `
-          <project-card>
-            <project-card-header>
-              <h3>${this.project.name}</h3>
-              <p>${this.project.description}</p>
-            </project-card-header>
+      <project-card-header>
+        <h3>${this.project.name}</h3>
+        <p>${this.project.description}</p>
+      </project-card-header>
 
-            <picture>
-              <source srcset="${this.project.cover.lg}" media="(min-width: 768px)" />
-              <img
-                alt="Cover for ${this.project.name} project"
-                src="${this.project.cover.base}"
-                height="173"
-                width="330"
-              />
-            </picture>
+      <picture>
+        <source srcset="${this.project.cover.lg}" media="(min-width: 768px)" />
+        <img
+          alt="Cover for ${this.project.name} project"
+          src="${this.project.cover.base}"
+          height="173"
+          width="330"
+        />
+      </picture>
 
-            <a href="${this.project.url}" target="_blank">View project</a>
-          </project-card>
+      <a href="${this.project.url}" target="_blank">View project</a>
     `;
   }
 }
