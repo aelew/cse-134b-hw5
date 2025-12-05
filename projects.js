@@ -61,6 +61,9 @@ document.getElementById('load-remote')?.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('projects')) {
+    return;
+  }
   localStorage.setItem(
     'projects',
     JSON.stringify([
