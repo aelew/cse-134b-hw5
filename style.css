@@ -236,6 +236,7 @@ button {
   footer,
   section-header a,
   project-card a,
+  project-card p,
   form output {
     font-size: 0.875rem;
   }
@@ -269,8 +270,16 @@ project-card {
   flex-direction: column;
   gap: 0.5rem;
 
-  h3 {
-    margin: 0;
+  project-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    p {
+      color: color-mix(in oklab, var(--foreground, #000) 75%, transparent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
   }
 
   img {
