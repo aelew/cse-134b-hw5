@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Manage Projects | Andre Lew</title>
+  </head>
+  <body class="no-js">
+    <noscript>This site works best with JavaScript enabled!</noscript>
+
+    <button type="button" id="theme-switcher" aria-label="Switch theme">🌙</button>
+
+    <header>
+      <a href="/">
+        <img src="/media/avatar.svg" alt="Avatar of Andre Lew" height="72" width="72" />
+        <h1>Andre Lew</h1>
+      </a>
+
+      <input type="checkbox" id="menu" class="menu-toggle" />
+      <label for="menu" class="menu-icon">&#9776;</label>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/experiments">Experiments</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <section-header>
+          <hgroup>
+            <h2>Manage Projects</h2>
+            <p>Create, update, and delete projects</p>
+          </hgroup>
+        </section-header>
+
+        <aside>
+          <h3>Instructions</h3>
+          <p>
+            This page shows CRUD operations (Create, Read, Update, Delete) on project card data.
+          </p>
+          <p>
+            All of the CRUD operations use proper HTTP methods (GET, POST, PUT, DELETE) and log
+            requests to your browser console. In local storage mode, changes will show up when you
+            click the Load Local button on the <a href="/projects">projects page</a>. Due to
+            limitations with the remote server API (My JSON Server), changes made with the remote API are not able to
+            persist between calls (but the requests are still performed as if they did).
+          </p>
+          <form>
+            <form-group>
+              <label for="storage-mode">Storage Mode</label>
+              <select id="storage-mode">
+                <option value="local">Local Storage (persists changes)</option>
+                <option value="remote">Remote API (DEMO ONLY - data not persisted)</option>
+              </select>
+            </form-group>
+          </form>
+        </aside>
+
+        <output id="info-message" data-variant="info" aria-live="polite"></output>
+        <output id="error-message" data-variant="error" role="alert"></output>
+
+        <!-- CREATE FORM -->
+        <section>
+          <h3>Create New Project</h3>
+          <form id="create-form">
+            <fieldset>
+              <legend>Add a new project card</legend>
+
+              <form-group>
+                <label for="create-name">Project Name</label>
+                <input
+                  type="text"
+                  id="create-name"
+                  name="name"
+                  required
+                  maxlength="100"
+                  placeholder="My Cool Project"
+                />
+              </form-group>
+
+              <form-group>
+                <label for="create-description">Description</label>
+                <textarea
+                  id="create-description"
+                  name="description"
+                  required
+                  maxlength="200"
+                  rows="3"
+                  placeholder="A brief description of the project"
+                ></textarea>
+              </form-group>
+
+              <form-group>
+                <label for="create-url">Project URL</label>
+                <input
+                  type="url"
+                  id="create-url"
+                  name="url"
+                  required
+                  placeholder="https://example.com"
+                />
+              </form-group>
+
+              <form-group>
+                <label for="create-cover-base">Cover Image URL (Base)</label>
+                <input
+                  type="url"
+                  id="create-cover-base"
+                  name="cover-base"
+                  required
+                  placeholder="https://example.com/media/projects/project.jpg"
+                />
+              </form-group>
+
+              <form-group>
+                <label for="create-cover-lg">Cover Image URL (Large)</label>
+                <input
+                  type="url"
+                  id="create-cover-lg"
+                  name="cover-lg"
+                  required
+                  placeholder="https://example.com/media/projects/project-lg.jpg"
+                />
+              </form-group>
+
+              <button type="submit">Create Project</button>
+            </fieldset>
+          </form>
+        </section>
+
+        <!-- UPDATE FORM -->
+        <section>
+          <h3>Update Existing Project</h3>
+          <form id="update-form">
+            <fieldset>
+              <legend>Modify an existing project</legend>
+
+              <form-group>
+                <label for="update-select">Select project to update</label>
+                <select id="update-select" name="project-id" required>
+                  <option value="">-- Select a project --</option>
+                </select>
+              </form-group>
+
+              <form-group>
+                <label for="update-name">Project Name</label>
+                <input type="text" id="update-name" name="name" required maxlength="100" />
+              </form-group>
+
+              <form-group>
+                <label for="update-description">Description</label>
+                <textarea
+                  id="update-description"
+                  name="description"
+                  required
+                  maxlength="200"
+                  rows="3"
+                ></textarea>
+              </form-group>
+
+              <form-group>
+                <label for="update-url">Project URL</label>
+                <input type="url" id="update-url" name="url" required />
+              </form-group>
+
+              <form-group>
+                <label for="update-cover-base">Cover Image URL (Base)</label>
+                <input type="url" id="update-cover-base" name="cover-base" required />
+              </form-group>
+
+              <form-group>
+                <label for="update-cover-lg">Cover Image URL (Large)</label>
+                <input type="url" id="update-cover-lg" name="cover-lg" required />
+              </form-group>
+
+              <button type="submit">Update Project</button>
+            </fieldset>
+          </form>
+        </section>
+
+        <!-- DELETE FORM -->
+        <section>
+          <h3>Delete Project</h3>
+          <form id="delete-form">
+            <fieldset>
+              <legend>Remove a project card</legend>
+
+              <form-group>
+                <label for="delete-select">Select project to delete</label>
+                <select id="delete-select" name="project-id" required>
+                  <option value="">-- Select a project --</option>
+                </select>
+              </form-group>
+
+              <button type="submit" data-variant="danger">Delete Project</button>
+            </fieldset>
+          </form>
+        </section>
+
+        <!-- CURRENT PROJECTS LIST -->
+        <section>
+          <h3>Current Projects</h3>
+          <ul id="projects-list"></ul>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Andre Lew. All rights reserved.</p>
+    </footer>
+
+    <script src="/theme.js"></script>
+    <script src="/manage-projects.js"></script>
+  </body>
+</html>

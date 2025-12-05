@@ -1,3 +1,5 @@
+const LOCAL_PROJECTS_KEY = 'projects';
+
 class ProjectCardElement extends HTMLElement {
   constructor() {
     super();
@@ -44,7 +46,7 @@ function updateProjects(projects) {
 }
 
 document.getElementById('load-local')?.addEventListener('click', () => {
-  const projects = JSON.parse(localStorage.getItem('projects'));
+  const projects = JSON.parse(localStorage.getItem(LOCAL_PROJECTS_KEY));
   if (!Array.isArray(projects)) {
     throw new Error('Invalid data');
   }
@@ -65,14 +67,16 @@ document.getElementById('load-remote')?.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('projects')) {
+  if (localStorage.getItem(LOCAL_PROJECTS_KEY)) {
     return;
   }
 
+  // init if empty
   localStorage.setItem(
-    'projects',
+    LOCAL_PROJECTS_KEY,
     JSON.stringify([
       {
+        id: 0,
         name: 'DevTerms',
         description: 'Online dictionary curated for developers',
         url: 'https://devterms.com',
@@ -82,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       },
       {
+        id: 1,
         name: 'Cobalt',
         description: 'Social media downloader extension for Raycast',
         url: 'https://www.raycast.com/aelew/cobalt',
@@ -91,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       },
       {
+        id: 2,
         name: 'Mailery',
         description: 'Cross-platform email client',
         url: 'https://mailery.app',
@@ -100,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       },
       {
+        id: 3,
         name: 'Tech Internship Alerts',
         description: 'Job listing and monitoring bot',
         url: 'https://github.com/aelew/tech-internship-alerts',
