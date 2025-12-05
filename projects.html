@@ -46,84 +46,11 @@
         </section-header>
 
         <grid-container columns="2">
-          <project-card>
-            <project-card-header>
-              <h3>DevTerms</h3>
-              <p>Online dictionary curated for developers</p>
-            </project-card-header>
-
-            <picture>
-              <source srcset="/media/projects/devterms-lg.jpg" media="(min-width: 768px)" />
-              <img
-                src="/media/projects/devterms.jpg"
-                alt="Cover for DevTerms project"
-                height="173"
-                width="330"
-              />
-            </picture>
-
-            <a href="https://devterms.com" target="_blank">View project</a>
-          </project-card>
-
-          <project-card>
-            <project-card-header>
-              <h3>Cobalt</h3>
-              <p>Social media downloader extension for Raycast</p>
-            </project-card-header>
-
-            <picture>
-              <source srcset="/media/projects/raycast-cobalt-lg.jpg" media="(min-width: 768px)" />
-              <img
-                src="/media/projects/raycast-cobalt.jpg"
-                alt="Cover for Cobalt project"
-                height="173"
-                width="330"
-              />
-            </picture>
-            <a href="https://www.raycast.com/aelew/cobalt" target="_blank">View project</a>
-          </project-card>
-
-          <project-card>
-            <project-card-header>
-              <h3>Mailery</h3>
-              <p>Cross-platform email client</p>
-            </project-card-header>
-
-            <picture>
-              <source srcset="/media/projects/mailery-lg.jpg" media="(min-width: 768px)" />
-              <img
-                src="/media/projects/mailery.jpg"
-                alt="Cover for Mailery project"
-                height="173"
-                width="330"
-              />
-            </picture>
-            <a href="https://mailery.app" target="_blank">View project</a>
-          </project-card>
-
-          <project-card>
-            <project-card-header>
-              <h3>Tech Internship Alerts</h3>
-              <p>Job listing and monitoring bot</p>
-            </project-card-header>
-
-            <picture>
-              <source
-                srcset="/media/projects/tech-internship-alerts-lg.jpg"
-                media="(min-width: 768px)"
-              />
-              <img
-                src="/media/projects/tech-internship-alerts.jpg"
-                alt="Cover for Tech Internship Alerts project"
-                height="173"
-                width="330"
-              />
-            </picture>
-            <a href="https://github.com/aelew/tech-internship-alerts" target="_blank"
-              >View project</a
-            >
-          </project-card>
+          <button type="button" id="load-local">Load Local</button>
+          <button type="button" id="load-remote">Load Remote</button>
         </grid-container>
+
+        <grid-container columns="2" id="project-grid"></grid-container>
       </section>
     </main>
 
@@ -132,5 +59,6 @@
     </footer>
 
     <script src="/theme.js"></script>
+    <script src="/projects.js"></script>
   </body>
 </html>
