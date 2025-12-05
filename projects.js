@@ -1,33 +1,26 @@
 class ProjectCardElement extends HTMLElement {
-  project;
-
-  constructor(project) {
+  constructor() {
     super();
-    this.project = project;
   }
 
-  connectedCallback() {
-    if (!this.project) {
-      return;
-    }
-
+  set data(project) {
     this.innerHTML = `
       <project-card-header>
-        <h3>${this.project.name}</h3>
-        <p>${this.project.description}</p>
+        <h3>${project.name}</h3>
+        <p>${project.description}</p>
       </project-card-header>
 
       <picture>
-        <source srcset="${this.project.cover.lg}" media="(min-width: 768px)" />
+        <source srcset="${project.cover.lg}" media="(min-width: 768px)" />
         <img
-          alt="Cover for ${this.project.name} project"
-          src="${this.project.cover.base}"
+          alt="Cover for ${project.name} project"
+          src="${project.cover.base}"
           height="173"
           width="330"
         />
       </picture>
 
-      <a href="${this.project.url}" target="_blank">View project</a>
+      <a href="${project.url}" target="_blank">View project</a>
     `;
   }
 }
@@ -35,9 +28,18 @@ class ProjectCardElement extends HTMLElement {
 customElements.define('project-card', ProjectCardElement);
 
 function updateProjects(projects) {
+  const container = document.getElementById('project-grid');
+  if (!container) {
+    throw new Error('Project grid container not found');
+  }
+
+  // reset projects
+  container.innerHTML = '';
+
   projects.forEach((project) => {
-    const card = new ProjectCardElement(project);
-    document.getElementById('project-grid')?.appendChild(card);
+    const card = new ProjectCardElement();
+    card.data = project;
+    container.appendChild(card);
   });
 }
 
@@ -46,6 +48,7 @@ document.getElementById('load-local')?.addEventListener('click', () => {
   if (!Array.isArray(projects)) {
     throw new Error('Invalid data');
   }
+
   updateProjects(projects);
 });
 
@@ -56,6 +59,7 @@ document.getElementById('load-remote')?.addEventListener('click', () => {
       if (!Array.isArray(projects)) {
         throw new Error('Invalid data');
       }
+
       updateProjects(projects);
     });
 });
@@ -64,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('projects')) {
     return;
   }
+
   localStorage.setItem(
     'projects',
     JSON.stringify([
