@@ -4,12 +4,38 @@
   --foreground: light-dark(color(display-p3 0.0938 0.0938 0.1048), color(display-p3 1 1 1));
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root[data-theme='light'] {
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
+}
+
+/* skip-to-content link for accessibility */
+#skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--foreground, #000);
+  color: var(--background, #fff);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.2s ease-in-out;
+}
+
+#skip-link:focus {
+  top: 0;
+  outline: 3px solid color-mix(in oklab, var(--foreground) 50%, transparent);
+  outline-offset: 3px;
 }
 
 #theme-switcher {
@@ -68,6 +94,10 @@ body {
   body {
     font-family: InterVariable, sans-serif;
   }
+}
+
+main {
+  scroll-margin-top: 1rem;
 }
 
 grid-container {
